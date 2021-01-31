@@ -33,13 +33,17 @@ public class LoginController {
 
         // 2. ถ้าตรง ส่งข้อมูล customer กลับไปแสดงผล
         if (matchingCustomer != null) {
-            model.addAttribute("greeting",
-                    "Welcome, " + matchingCustomer.getName());
+            model.addAttribute("customertitle",
+                    matchingCustomer.getName() + " Bank Account");
+            model.addAttribute("bankaccounts", bankAccountService.getCustomerBankAccount(customer.getId()));
+
+
+            return  "customeraccount";
         } else {
             // 3. ถ้าไม่ตรง แจ้งว่าไม่มีข้อมูล customer นี้
             model.addAttribute("greeting", "Can't find customer");
+            return "home";
         }
-        return "home";
     }
 }
 
